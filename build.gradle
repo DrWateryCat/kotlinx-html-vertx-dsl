@@ -1,0 +1,42 @@
+buildscript {
+    ext.kotlin_version = '1.2.21'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+
+def vertx_ver = '3.5.0'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+mainClassName = "com.eljefe.htmltest.Main"
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/iovertx-3720/"
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "io.vertx:vertx-core:$vertx_ver"
+    compile "io.vertx:vertx-web:$vertx_ver"
+    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.2'
+    compile "org.jetbrains.kotlinx:kotlinx-html-jvm:0.6.8"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
